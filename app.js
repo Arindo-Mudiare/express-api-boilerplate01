@@ -6,6 +6,9 @@ const app = express();
 
 // database connection
 const connectDB = require("./db/connect");
+
+// router
+const productRouter = require("./routes/products");
 // middleware
 const notFoundMiddleware = require("./middleware/not-found");
 const errorMiddleware = require("./middleware/error-handler");
@@ -16,6 +19,8 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send(`<h1>Api Home</h1><a href='/api/v1/products'>main page route</a>`);
 });
+
+app.use("/api/v1/products", productRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);
